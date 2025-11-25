@@ -67,6 +67,7 @@ class ValueIterationAgent(ValueEstimationAgent):
         for k in range(self.iterations):
             newValues = util.Counter()
             # to compute values[k+1] from values[k]
+            # newValues represents the k+1 values, and will be computed in its entirety before replacing the old values
             for state in states:
 
                 #handle cases without actions
@@ -113,6 +114,7 @@ class ValueIterationAgent(ValueEstimationAgent):
         for transition in transitions:
             nextState = transition[0]
             probability = transition[1]
+            #Q value formula by the book
             accumulator += ( (probability) * (self.mdp.getReward(state, action, nextState) + (self.discount * self.getValue(nextState)) ) )
         return accumulator
 
